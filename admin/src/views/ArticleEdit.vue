@@ -8,6 +8,11 @@
       <el-form-item label="描述">
         <el-input v-model="model.description" type="textarea"></el-input>
       </el-form-item>
+      <el-form-item label="标签">
+        <el-select v-model="model.tags">
+          <el-option v-for="item of tags" :key="item._id" :label="item.name" :value="item._id"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="内容">
         <el-input v-model="model.content" type="textarea"></el-input>
       </el-form-item>
@@ -25,6 +30,7 @@ export default {
   },
   data() {
     return {
+      tags: [],
       model: {}
     }
   },
@@ -45,9 +51,14 @@ export default {
     async fetch() {
       const res = await this.$http.get(`articles/${this.id}`)
       this.model = res.data
+    },
+    async fetchTags() {
+      const res = await this.$http.get('tags')
+      this.tags = res.data
     }
   },
   created() {
+    this.fetchTags()
     this.id && this.fetch()
   }
 }
