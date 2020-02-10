@@ -3,18 +3,49 @@
     <h1>文章列表</h1>
     <el-table :data="items">
       <el-table-column prop="title" label="标题"></el-table-column>
-      <el-table-column prop="tags.name" label="标签"></el-table-column>
+      <el-table-column label="标签">
+        <template slot-scope="{ row }">
+          <span
+            v-for="item in row.tags"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+            style="padding-right: 10px;"
+            >{{ item.name }}</span
+          >
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="createdAt"
+        :formatter="dateFormat"
+        label="创建时间"
+      ></el-table-column>
+      <el-table-column
+        prop="updatedAt"
+        :formatter="dateFormat"
+        label="最近修改时间"
+      ></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
-        <template slot-scope="{row}">
-          <el-button type="text" size="small" @click="$router.push(`/articles/edit/${row._id}`)">编辑</el-button>
-          <el-button type="text" size="small" @click="remove(row)">删除</el-button>
+        <template slot-scope="{ row }">
+          <el-button
+            type="text"
+            size="small"
+            @click="$router.push(`/articles/edit/${row._id}`)"
+            >编辑</el-button
+          >
+          <el-button type="text" size="small" @click="remove(row)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
   </div>
 </template>
+·
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
   data() {
     return {
@@ -41,6 +72,13 @@ export default {
           this.fetch()
         })
         .catch(() => {})
+    },
+    dateFormat(row, column) {
+      const date = row[column.property]
+      if (date == undefined) {
+        return ''
+      }
+      return dayjs(date).format('YYYY/MM/DD HH:mm:ss')
     }
   },
   created() {

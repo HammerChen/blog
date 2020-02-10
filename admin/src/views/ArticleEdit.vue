@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{id ? '编辑' : '新建'}}文章</h1>
+    <h1>{{ id ? '编辑' : '新建' }}文章</h1>
     <el-form @submit.native.prevent="save">
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
@@ -9,24 +9,42 @@
         <el-input v-model="model.description" type="textarea"></el-input>
       </el-form-item>
       <el-form-item label="标签">
-        <el-select v-model="model.tags">
-          <el-option v-for="item of tags" :key="item._id" :label="item.name" :value="item._id"></el-option>
+        <el-select v-model="model.tags" multiple>
+          <el-option
+            v-for="item in tags"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="内容">
-        <el-input v-model="model.content" type="textarea"></el-input>
+        <div class="editor">
+          <mavon-editor
+            v-model="model.content"
+            style="height: 100%"
+          ></mavon-editor>
+        </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" native-type="submit">{{id ? '保存' : '提交'}}</el-button>
+        <el-button type="primary" native-type="submit">{{
+          id ? '保存' : '提交'
+        }}</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 export default {
   props: {
     id: {}
+  },
+  components: {
+    mavonEditor
   },
   data() {
     return {
@@ -63,3 +81,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.editor {
+  height: 580px;
+}
+</style>

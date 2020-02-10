@@ -12,9 +12,7 @@ module.exports = app => {
 
   // 文章列表
   router.get('/articles', async (req, res) => {
-    const items = await Article.find()
-      .populate('tags')
-      .limit(10)
+    const items = await Article.find().populate('tags')
     res.send(items)
   })
 
@@ -46,7 +44,7 @@ module.exports = app => {
 
   // 标签列表
   router.get('/tags', async (req, res) => {
-    const items = await Tag.find().limit(10)
+    const items = await Tag.find()
     res.send(items)
   })
 
