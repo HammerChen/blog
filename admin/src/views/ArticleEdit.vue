@@ -8,28 +8,24 @@
       <el-form-item label="描述">
         <el-input v-model="model.description" type="textarea"></el-input>
       </el-form-item>
-      <el-form-item label="标签">
-        <el-select v-model="model.tags" multiple>
-          <el-option
-            v-for="item in tags"
-            :key="item._id"
-            :label="item.name"
-            :value="item._id"
-          ></el-option>
+      <el-form-item label="标签"></el-form-item>
+      <el-form-item>
+        <el-select v-model="model.tags" multiple placeholder="选择标签(可多选)">
+          <el-option v-for="item in tags" :key="item._id" :label="item.name" :value="item._id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="内容">
+      <el-form-item label="内容"></el-form-item>
+      <el-form-item>
         <div class="editor">
-          <mavon-editor
-            v-model="model.content"
-            style="height: 100%"
-          ></mavon-editor>
+          <mavon-editor v-model="model.content" style="height: 100%"></mavon-editor>
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" native-type="submit">{{
+        <el-button type="primary" native-type="submit">
+          {{
           id ? '保存' : '提交'
-        }}</el-button>
+          }}
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
