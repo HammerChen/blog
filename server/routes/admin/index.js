@@ -1,72 +1,54 @@
 module.exports = app => {
   const express = require('express')
-  const router = express.Router()
-  const Article = require('../../models/Article')
-  const Tag = require('../../models/Tag')
+  const router = express.Router({
+    mergeParams: true
+  })
 
-  // 新建文章
-  router.post('/articles', async (req, res) => {
-    const model = await Article.create(req.body)
+  // 新建
+  router.post('/', async (req, res) => {
+    const model = await req.Model.create(req.body)
     res.send(model)
   })
 
-  // 文章列表
-  router.get('/articles', async (req, res) => {
-    const items = await Article.find().populate('tags')
+  // 列表
+  router.get('/', async (req, res) => {
+    const queryOptions = {}
+    if (req.Model.modelName === 'Article') {
+      queryOptions.populate = 'tags'
+    }
+    const items = await req.Model.find()
+      .setOptions(queryOptions)
+      .limit(10)
     res.send(items)
   })
 
-  // 文章详情
-  router.get('/articles/:id', async (req, res) => {
-    const model = await Article.findById(req.params.id)
+  // 详情
+  router.get('/:id', async (req, res) => {
+    const model = await req.Model.findById(req.params.id)
     res.send(model)
   })
 
-  // 编辑文章
-  router.put('/articles/:id', async (req, res) => {
-    const model = await Article.findByIdAndUpdate(req.params.id, req.body)
+  // 编辑
+  router.put('/:id', async (req, res) => {
+    const model = await req.Model.findByIdAndUpdate(req.params.id, req.body)
     res.send(model)
   })
 
-  // 删除文章
-  router.delete('/articles/:id', async (req, res) => {
-    await Article.findByIdAndDelete(req.params.id, req.body)
+  // 删除
+  router.delete('/:id', async (req, res) => {
+    await req.Model.findByIdAndDelete(req.params.id, req.body)
     res.send({
       success: true
     })
   })
 
-  // 新建标签
-  router.post('/tags', async (req, res) => {
-    const model = await Tag.create(req.body)
-    res.send(model)
-  })
-
-  // 标签列表
-  router.get('/tags', async (req, res) => {
-    const items = await Tag.find()
-    res.send(items)
-  })
-
-  // 标签详情
-  router.get('/tags/:id', async (req, res) => {
-    const model = await Tag.findById(req.params.id)
-    res.send(model)
-  })
-
-  // 编辑标签
-  router.put('/tags/:id', async (req, res) => {
-    const model = await Tag.findByIdAndUpdate(req.params.id, req.body)
-    res.send(model)
-  })
-
-  // 删除标签
-  router.delete('/tags/:id', async (req, res) => {
-    await Tag.findByIdAndDelete(req.params.id, req.body)
-    res.send({
-      success: true
-    })
-  })
-
-  app.use('/admin/api', router)
+  app.use(
+    '/admin/api/rest/:resource',
+    async (req, res, next) => {
+      const modelName = require('inflection').classify(req.params.resource)
+      req.Model = require(`../../models/${modelName}`)
+      next()
+    },
+    router
+  )
 }

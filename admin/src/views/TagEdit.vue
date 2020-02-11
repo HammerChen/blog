@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{id ? '编辑' : '新建'}}标签</h1>
+    <h1>{{ id ? '编辑' : '新建' }}标签</h1>
     <el-form @submit.native.prevent="save">
       <el-form-item label="标签名称">
         <el-input v-model="model.name"></el-input>
@@ -9,7 +9,9 @@
         <el-input v-model="model.description" type="textarea"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" native-type="submit">{{id ? '保存' : '提交'}}</el-button>
+        <el-button type="primary" native-type="submit">{{
+          id ? '保存' : '提交'
+        }}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -29,9 +31,9 @@ export default {
     async save() {
       let res
       if (this.id) {
-        res = await this.$http.put(`tags/${this.id}`, this.model)
+        res = await this.$http.put(`rest/tags/${this.id}`, this.model)
       } else {
-        res = await this.$http.post('tags', this.model)
+        res = await this.$http.post('rest/tags', this.model)
       }
       this.$router.push('/tags/list')
       this.$message({
@@ -40,7 +42,7 @@ export default {
       })
     },
     async fetch() {
-      const res = await this.$http.get(`tags/${this.id}`)
+      const res = await this.$http.get(`rest/tags/${this.id}`)
       this.model = res.data
     }
   },

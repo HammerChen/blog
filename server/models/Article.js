@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Tag = require('./Tag')
 
 const schema = new mongoose.Schema(
   {

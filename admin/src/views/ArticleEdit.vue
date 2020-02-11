@@ -21,11 +21,7 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" native-type="submit">
-          {{
-          id ? '保存' : '提交'
-          }}
-        </el-button>
+        <el-button type="primary" native-type="submit">{{ id ? '保存' : '提交' }}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -52,9 +48,9 @@ export default {
     async save() {
       let res
       if (this.id) {
-        res = await this.$http.put(`articles/${this.id}`, this.model)
+        res = await this.$http.put(`rest/articles/${this.id}`, this.model)
       } else {
-        res = await this.$http.post('articles', this.model)
+        res = await this.$http.post('rest/articles', this.model)
       }
       this.$router.push('/articles/list')
       this.$message({
@@ -63,11 +59,11 @@ export default {
       })
     },
     async fetch() {
-      const res = await this.$http.get(`articles/${this.id}`)
+      const res = await this.$http.get(`rest/articles/${this.id}`)
       this.model = res.data
     },
     async fetchTags() {
-      const res = await this.$http.get('tags')
+      const res = await this.$http.get('rest/tags')
       this.tags = res.data
     }
   },

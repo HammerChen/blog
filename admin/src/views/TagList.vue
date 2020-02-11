@@ -5,9 +5,16 @@
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="description" label="描述"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
-        <template slot-scope="{row}">
-          <el-button type="text" size="small" @click="$router.push(`/tags/edit/${row._id}`)">编辑</el-button>
-          <el-button type="text" size="small" @click="remove(row)">删除</el-button>
+        <template slot-scope="{ row }">
+          <el-button
+            type="text"
+            size="small"
+            @click="$router.push(`/tags/edit/${row._id}`)"
+            >编辑</el-button
+          >
+          <el-button type="text" size="small" @click="remove(row)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -23,7 +30,7 @@ export default {
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get('tags')
+      const res = await this.$http.get('rest/tags')
       this.items = res.data
     },
     async remove(row) {
@@ -33,7 +40,7 @@ export default {
         type: 'warning'
       })
         .then(async () => {
-          const res = await this.$http.delete(`tags/${row._id}`)
+          const res = await this.$http.delete(`rest/tags/${row._id}`)
           this.$message({
             type: 'success',
             message: '删除成功!'
