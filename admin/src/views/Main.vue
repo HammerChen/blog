@@ -1,28 +1,30 @@
 <template>
-  <el-container style="height: 100vh;">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router :default-openeds="['1']">
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-message"></i>内容管理
-          </template>
-          <el-menu-item-group>
-            <template slot="title">文章</template>
-            <el-menu-item index="/articles/list">文章列表</el-menu-item>
-            <el-menu-item index="/articles/create">新建文章</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group>
-            <template slot="title">标签</template>
-            <el-menu-item index="/tags/list">标签列表</el-menu-item>
-            <el-menu-item index="/tags/create">新建标签</el-menu-item>
-          </el-menu-item-group>
+  <el-container>
+    <el-aside width="200px;">
+      <el-menu
+        mode="vertical"
+        style="height:100vh;"
+        :default-active="$route.path"
+        router
+      >
+        <el-submenu
+          v-for="(item, index) in menu.items"
+          :index="`menu-item-${index}`"
+          :key="`menu-item-${index}}`"
+        >
+          <template slot="title">{{ item.title }}</template>
+          <el-menu-item
+            v-for="(subItem, subIndex) in item.items"
+            :key="`menu-item-${index}-${subIndex}`"
+            :index="subItem.path"
+            >{{ subItem.title }}</el-menu-item
+          >
         </el-submenu>
       </el-menu>
     </el-aside>
-
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <span>陈小锤</span>
+      <el-header>
+        <h3>陈小锤的博客 - 后台管理界面</h3>
       </el-header>
       <el-main>
         <router-view :key="$route.path"></router-view>
@@ -33,9 +35,28 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-
 @Component({})
-export default class Main extends Vue {}
+export default class Main extends Vue {
+  menu = {
+    items: [
+      {
+        title: '文章管理',
+        items: [
+          { title: '首页', path: '/' },
+          { title: '文章列表', path: '/articles/list' },
+          { title: '新建文章', path: '/articles/create' }
+        ]
+      },
+      {
+        title: '标签管理',
+        items: [
+          { title: '标签列表', path: '/tags/list' },
+          { title: '新建标签', path: '/tags/create' }
+        ]
+      }
+    ]
+  }
+}
 </script>
 
 <style>
@@ -43,11 +64,12 @@ export default class Main extends Vue {}
   background-color: #b3c0d1;
   color: #333;
   line-height: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .el-aside {
+  background-color: rgb(238, 241, 246);
   color: #333;
 }
 </style>
-
-<script></script>

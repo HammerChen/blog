@@ -6,12 +6,12 @@
       <el-table-column label="标签">
         <template slot-scope="{ row }">
           <span
-            v-for="tags in row.tags"
-            :key="tags._id"
-            :label="tags.name"
-            :value="tags._id"
+            v-for="item in row.tags"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
             style="padding-right: 10px;"
-          >{{ tags.name }}</span>
+          >{{ item.name }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="createdAt" :formatter="dateFormat" label="创建时间"></el-table-column>
@@ -35,11 +35,7 @@ export default class ArticleList extends Vue {
   data = {}
 
   async fetch() {
-    const res = await this.$http.get('articles', {
-      params: {
-        populate: 'tags'
-      }
-    })
+    const res = await this.$http.get('articles')
     this.data = res.data
   }
   async remove(row) {
