@@ -31,6 +31,13 @@
   </el-container>
 </template>
 
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({})
+export default class Main extends Vue {}
+</script>
+
 <style>
 .el-header {
   background-color: #b3c0d1;
