@@ -61,15 +61,9 @@ export default class Main extends Vue {
 
 <style>
 .el-header {
-  background-color: #b3c0d1;
-  color: #333;
   line-height: 60px;
   display: flex;
   align-items: center;
-}
-
-.el-aside {
-  background-color: rgb(238, 241, 246);
-  color: #333;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px 0px;
 }
 </style>
