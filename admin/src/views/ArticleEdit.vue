@@ -62,8 +62,8 @@ export default class ArticleEdit extends Vue {
     const formdata = new FormData()
     formdata.append('file', $file)
     const res = await this.$http.post('upload', formdata)
-    const ref: any = this.$refs
-    ref.md.$img2Url(pos, res.data.url)
+    const ref: any = this.$refs.md
+    ref.$img2Url(pos, res.data.url)
   }
   created() {
     this.fetchTags()

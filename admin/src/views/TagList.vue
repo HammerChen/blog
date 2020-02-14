@@ -4,7 +4,7 @@
     <el-table :data="data.data">
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="description" label="描述"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="180">
+      <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="{ row }">
           <el-button type="text" size="small" @click="$router.push(`/tags/edit/${row._id}`)">编辑</el-button>
           <el-button type="text" size="small" @click="remove(row)">删除</el-button>
