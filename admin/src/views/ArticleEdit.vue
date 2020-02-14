@@ -17,11 +17,15 @@
       <el-form-item label="内容"></el-form-item>
       <el-form-item>
         <div class="editor">
-          <mavon-editor v-model="data.content" style="height: 100%"></mavon-editor>
+          <mavon-editor ref="md" @imgAdd="$imgAdd" v-model="data.content" style="height: 100%"></mavon-editor>
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" native-type="submit">{{ id ? '保存' : '提交' }}</el-button>
+        <el-button type="primary" native-type="submit">
+          {{
+          id ? '保存' : '提交'
+          }}
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -57,7 +61,12 @@ export default class ArticleEdit extends Vue {
     const res = await this.$http.get('tags')
     this.tags = res.data
   }
-
+  async $imgAdd(pos, $file) {
+    const formdata = new FormData()
+    formdata.append('file', $file)
+    const res = await this.$http.post('upload', formdata)
+    this.$refs.md.$img2Url(pos, res.data.url)
+  }
   created() {
     this.fetchTags()
     this.id && this.fetch()
