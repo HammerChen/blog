@@ -23,6 +23,18 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="pagination">
+      <el-pagination
+        background
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -33,10 +45,31 @@ import dayjs from 'dayjs'
 @Component({})
 export default class ArticleList extends Vue {
   data = {}
+  currentPage = 0
+  pageSize = 0
+  pageSizes = [10, 20, 30, 40, 50]
+  total = 0
+  query = {
+    limit: 10,
+    page: 1
+  }
 
   async fetch() {
-    const res = await this.$http.get('articles')
+    const res = await this.$http.get('articles', {
+      params: {
+        query: this.query
+      }
+    })
+    this.total = res.data.total
     this.data = res.data
+  }
+  async handleSizeChange(pageSize) {
+    this.query.limit = pageSize
+    this.fetch()
+  }
+  async handleCurrentChange(currentPage) {
+    this.query.page = currentPage
+    this.fetch()
   }
   async remove(row) {
     this.$confirm(`是否确定删除文章 "${row.title}"`, '提示', {
@@ -66,3 +99,10 @@ export default class ArticleList extends Vue {
   }
 }
 </script>
+
+<style>
+.pagination {
+  margin-top: 20px;
+  float: right;
+}
+</style>

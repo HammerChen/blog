@@ -8,13 +8,13 @@
       <el-form-item label="描述">
         <el-input v-model="data.description" type="textarea"></el-input>
       </el-form-item>
-      <el-form-item label="标签"></el-form-item>
+      <el-form-item style="margin-bottom: 0;" label="标签"></el-form-item>
       <el-form-item>
         <el-select v-model="data.tags" multiple style="width: 100%;" placeholder="选择标签(可多选)">
           <el-option v-for="item in tags.data" :key="item._id" :label="item.name" :value="item._id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="内容"></el-form-item>
+      <el-form-item style="margin-bottom: 0;" label="内容"></el-form-item>
       <el-form-item>
         <div class="editor">
           <mavon-editor ref="md" @imgAdd="$imgAdd" v-model="data.content" style="height: 100%"></mavon-editor>
