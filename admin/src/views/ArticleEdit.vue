@@ -48,10 +48,7 @@ export default class ArticleEdit extends Vue {
       res = await this.$http.post('articles', this.data)
     }
     this.$router.push('/articles/list')
-    this.$message({
-      type: 'success',
-      message: '保存成功'
-    })
+    this.$message.success('保存成功')
   }
   async fetch() {
     const res = await this.$http.get(`articles/${this.id}`)
@@ -65,7 +62,8 @@ export default class ArticleEdit extends Vue {
     const formdata = new FormData()
     formdata.append('file', $file)
     const res = await this.$http.post('upload', formdata)
-    this.$refs.md.$img2Url(pos, res.data.url)
+    const ref: any = this.$refs
+    ref.md.$img2Url(pos, res.data.url)
   }
   created() {
     this.fetchTags()

@@ -35,10 +35,7 @@ export default class TagEdit extends Vue {
       res = await this.$http.post('tags', this.data)
     }
     this.$router.push('/tags/list')
-    this.$message({
-      type: 'success',
-      message: '保存成功'
-    })
+    this.$message.success('保存成功')
   }
   async fetch() {
     const res = await this.$http.get(`tags/${this.id}`)

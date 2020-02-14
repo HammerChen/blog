@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column prop="createdAt" :formatter="dateFormat" label="创建时间"></el-table-column>
       <el-table-column prop="updatedAt" :formatter="dateFormat" label="最近修改时间"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="180">
+      <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="{ row }">
           <el-button type="text" size="small" @click="$router.push(`/articles/edit/${row._id}`)">编辑</el-button>
           <el-button type="text" size="small" @click="remove(row)">删除</el-button>
@@ -72,20 +72,18 @@ export default class ArticleList extends Vue {
     this.fetch()
   }
   async remove(row) {
-    this.$confirm(`是否确定删除文章 "${row.title}"`, '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    })
-      .then(async () => {
-        const res = await this.$http.delete(`articles/${row._id}`)
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-        this.fetch()
+    try {
+      await this.$confirm(`是否确认删除文章《${row.title}》？`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
-      .catch(() => {})
+    } catch (e) {
+      return
+    }
+    await this.$http.delete(`articles/${row._id}`)
+    this.$message.success('删除成功')
+    this.fetch()
   }
   dateFormat(row, column) {
     const date = row[column.property]
