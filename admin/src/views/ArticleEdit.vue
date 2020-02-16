@@ -47,7 +47,7 @@ export default class ArticleEdit extends Vue {
     } else {
       res = await this.$http.post('articles', this.data)
     }
-    this.$router.push('/articles/list')
+    this.$router.push('/')
     this.$message.success('保存成功')
   }
   async fetch() {
