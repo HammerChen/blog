@@ -13,8 +13,9 @@ const routes = [
     name: 'Main',
     component: Main,
     children: [
+      { path: '/articles/list', component: ArticleList },
       { path: '/articles/create', component: ArticleEdit },
-      { path: '/articles/list', component: ArticleList }
+      { path: '/articles/edit/:id', component: ArticleEdit, props: true }
     ]
   }
 ]

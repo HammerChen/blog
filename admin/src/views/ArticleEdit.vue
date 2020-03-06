@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>新建文章</h3>
+    <h3>{{ id ? '编辑' : '新建' }}文章</h3>
     <el-form style="padding-right: 18px;" @submit.native.prevent="create">
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
@@ -20,6 +20,9 @@
 
 <script>
 export default {
+  props: {
+    id: {}
+  },
   data() {
     return {
       model: {}
@@ -27,13 +30,25 @@ export default {
   },
   methods: {
     async create() {
-      const res = await this.$http.post('articles', this.model)
+      let res
+      if (this.id) {
+        res = await this.$http.put(`articles/${this.id}`, this.model)
+      } else {
+        res = await this.$http.post('articles', this.model)
+      }
       this.$router.push('/articles/list')
       this.$message({
         type: 'success',
         message: '保存成功'
       })
+    },
+    async fetch() {
+      const res = await this.$http.get(`articles/${this.id}`)
+      this.model = res.data
     }
+  },
+  created() {
+    this.id && this.fetch()
   }
 }
 </script>

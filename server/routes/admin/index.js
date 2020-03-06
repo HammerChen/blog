@@ -13,5 +13,15 @@ module.exports = app => {
     res.send(items)
   })
 
+  router.get('/articles/:id', async (req, res) => {
+    const model = await Article.findById(req.params.id)
+    res.send(model)
+  })
+
+  router.put('/articles/:id', async (req, res) => {
+    const model = await Article.findByIdAndUpdate(req.params.id, req.body)
+    res.send(model)
+  })
+
   app.use('/admin/api', router)
 }
