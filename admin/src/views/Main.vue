@@ -8,7 +8,7 @@
           >
           <el-menu-item-group>
             <template slot="title">文章</template>
-            <el-menu-item index="/articles/list">文章列表</el-menu-item>
+            <el-menu-item index="/">文章列表</el-menu-item>
             <el-menu-item index="/articles/create">新建文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
@@ -17,11 +17,11 @@
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span style="margin-right: 18px;">陈小锤</span>
+        <span style="margin-right: 18px;">@ 陈小锤</span>
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>

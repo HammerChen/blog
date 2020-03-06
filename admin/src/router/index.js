@@ -10,10 +10,9 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Main',
     component: Main,
     children: [
-      { path: '/articles/list', component: ArticleList },
+      { path: '/', component: ArticleList },
       { path: '/articles/create', component: ArticleEdit },
       { path: '/articles/edit/:id', component: ArticleEdit, props: true }
     ]
