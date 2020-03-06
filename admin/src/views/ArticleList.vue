@@ -2,10 +2,26 @@
   <div style="margin-right: 18px;">
     <h3>文章列表</h3>
     <el-table :data="items">
-      <el-table-column prop="title" label="标题"> </el-table-column>
-      <el-table-column prop="description" label="描述"> </el-table-column>
-      <el-table-column prop="updatedAt" label="更新时间"> </el-table-column>
-      <el-table-column fixed="right" label="操作" width="180">
+      <el-table-column prop="title" label="标题" width="600"> </el-table-column>
+      <el-table-column label="标签">
+        <template v-slot="{ row }">
+          <span
+            v-for="item in row.tags"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+            style="padding-right: 10px;"
+            >{{ item.name }}</span
+          >
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="updatedAt"
+        :formatter="dateFormat"
+        label="更新时间"
+      >
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot="{ row }">
           <el-button
             type="text"
@@ -23,6 +39,8 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
   data() {
     return {
@@ -51,6 +69,13 @@ export default {
         .catch(() => {
           return
         })
+    },
+    dateFormat(row, column) {
+      const date = row[column.property]
+      if (date == undefined) {
+        return ''
+      }
+      return dayjs(date).format('YYYY/MM/DD')
     }
   },
   created() {

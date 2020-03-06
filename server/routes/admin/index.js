@@ -10,7 +10,11 @@ module.exports = app => {
   })
 
   router.get('/', async (req, res) => {
-    const items = await req.Model.find().limit(10)
+    const queryOptions = {}
+    if (req.Model.modelName === 'Article') {
+      queryOptions.populate = 'tags'
+    }
+    const items = await req.Model.find().setOptions(queryOptions)
     res.send(items)
   })
 

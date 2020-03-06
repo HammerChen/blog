@@ -8,6 +8,22 @@
       <el-form-item label="描述">
         <el-input type="textarea" v-model="model.description"></el-input>
       </el-form-item>
+      <el-form-item label="标签" style="margin-bottom: 0;"> </el-form-item>
+      <el-form-item>
+        <el-select
+          v-model="model.tags"
+          multiple
+          style="width: 100%;"
+          placeholder="选择标签(可多选)"
+        >
+          <el-option
+            v-for="item in tags"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="内容">
         <el-input type="textarea" v-model="model.content"></el-input>
       </el-form-item>
@@ -28,7 +44,8 @@ export default {
   },
   data() {
     return {
-      model: {}
+      model: {},
+      tags: []
     }
   },
   methods: {
@@ -48,9 +65,14 @@ export default {
     async fetch() {
       const res = await this.$http.get(`rest/articles/${this.id}`)
       this.model = res.data
+    },
+    async fetchTags() {
+      const res = await this.$http.get('rest/tags')
+      this.tags = res.data
     }
   },
   created() {
+    this.fetchTags()
     this.id && this.fetch()
   }
 }
