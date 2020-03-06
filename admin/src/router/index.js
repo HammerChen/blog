@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
+import ArticleEdit from '../views/ArticleEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -9,7 +10,8 @@ const routes = [
   {
     path: '/',
     name: 'Main',
-    component: Main
+    component: Main,
+    children: [{ path: '/articles/create', component: ArticleEdit }]
   }
 ]
 
