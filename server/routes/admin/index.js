@@ -23,5 +23,12 @@ module.exports = app => {
     res.send(model)
   })
 
+  router.delete('/articles/:id', async (req, res) => {
+    await Article.findOneAndDelete(req.params.id, req.body)
+    res.send({
+      success: true
+    })
+  })
+
   app.use('/admin/api', router)
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{ id ? '编辑' : '新建' }}文章</h3>
-    <el-form style="padding-right: 18px;" @submit.native.prevent="create">
+    <el-form style="margin-right: 18px;" @submit.native.prevent="create">
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
       </el-form-item>
