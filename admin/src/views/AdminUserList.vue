@@ -1,15 +1,14 @@
 <template>
   <div style="margin-right: 18px;">
-    <h3>标签列表</h3>
+    <h3>管理员列表</h3>
     <el-table :data="items">
-      <el-table-column prop="name" label="名称"> </el-table-column>
-      <el-table-column prop="description" label="描述"> </el-table-column>
+      <el-table-column prop="username" label="用户名"> </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template v-slot="{ row }">
           <el-button
             type="text"
             size="small"
-            @click="$router.push(`/tags/edit/${row._id}`)"
+            @click="$router.push(`/admin_users/edit/${row._id}`)"
             >编辑</el-button
           >
           <el-button type="text" size="small" @click="remove(row)"
@@ -30,17 +29,17 @@ export default {
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get('rest/tags')
+      const res = await this.$http.get('rest/admin_users')
       this.items = res.data
     },
     async remove(row) {
-      this.$confirm(`是否确认删除标签 “${row.name}”`, '提示', {
+      this.$confirm(`是否确认删除管理员 “${row.username}”`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async () => {
-          await this.$http.delete(`rest/tags/${row._id}`)
+          await this.$http.delete(`rest/admin_users/${row._id}`)
           this.$message({
             type: 'success',
             message: '删除成功!'

@@ -8,6 +8,9 @@ import ArticleList from '../views/ArticleList.vue'
 import TagEdit from '../views/TagEdit.vue'
 import TagList from '../views/TagList.vue'
 
+import AdminUserEdit from '../views/AdminUserEdit.vue'
+import AdminUserList from '../views/AdminUserList.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,7 +23,10 @@ const routes = [
       { path: '/articles/edit/:id', component: ArticleEdit, props: true },
       { path: '/tags/list', component: TagList },
       { path: '/tags/create', component: TagEdit },
-      { path: '/tags/edit/:id', component: TagEdit, props: true }
+      { path: '/tags/edit/:id', component: TagEdit, props: true },
+      { path: '/admin_users/list', component: AdminUserList },
+      { path: '/admin_users/create', component: AdminUserEdit },
+      { path: '/admin_users/edit/:id', component: AdminUserEdit, props: true }
     ]
   }
 ]
