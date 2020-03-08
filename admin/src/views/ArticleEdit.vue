@@ -8,7 +8,7 @@
       <el-form-item label="描述">
         <el-input type="textarea" v-model="model.description"></el-input>
       </el-form-item>
-      <el-form-item label="标签" style="margin-bottom: 0;"> </el-form-item>
+      <el-form-item label="标签" style="margin-bottom: 0;"></el-form-item>
       <el-form-item>
         <el-select
           v-model="model.tags"
@@ -24,8 +24,16 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="内容">
-        <el-input type="textarea" v-model="model.content"></el-input>
+      <el-form-item label="内容" style="margin-bottom: 0;"></el-form-item>
+      <el-form-item>
+        <div class="editor">
+          <mavon-editor
+            ref="md"
+            @imgAdd="$imgAdd"
+            v-model="model.content"
+            style="height: 100%"
+          ></mavon-editor>
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">{{
@@ -69,6 +77,12 @@ export default {
     async fetchTags() {
       const res = await this.$http.get('rest/tags')
       this.tags = res.data
+    },
+    async $imgAdd(pos, $file) {
+      const formdata = new FormData()
+      formdata.append('file', $file)
+      const res = await this.$http.post('upload', formdata)
+      this.$refs.md.$img2Url(pos, res.data.url)
     }
   },
   created() {
@@ -78,4 +92,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.editor {
+  height: 680px;
+}
+</style>
