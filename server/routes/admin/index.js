@@ -51,6 +51,23 @@ module.exports = app => {
     router
   )
 
+  const multer = require('multer')
+  const MAO = require('multer-aliyun-oss')
+  const upload = multer({
+    storage: MAO({
+      config: {
+        region: process.env.OSS_REGION,
+        accessKeyId: process.env.OSS_ACCESS_KEY_ID,
+        accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET,
+        bucket: process.env.OSS_BUCKET
+      }
+    })
+  })
+  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+    const file = req.file
+    res.send(file)
+  })
+
   app.post('/admin/api/login', async (req, res) => {
     const { username, password } = req.body
     // 1、根据用户名找用户
