@@ -2,6 +2,10 @@ const express = require('express')
 
 const app = express()
 
+require('dotenv').config()
+
+app.set('secret', process.env.SECRET)
+
 app.use(require('cors')())
 app.use(express.json())
 

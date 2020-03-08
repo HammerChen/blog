@@ -1,5 +1,8 @@
 module.exports = app => {
   const express = require('express')
+  const assert = require('http-assert')
+  const jwt = require('jsonwebtoken')
+  const AdminUser = require('../../models/AdminUser')
   const router = express.Router({
     mergeParams: true
   })
@@ -35,13 +38,36 @@ module.exports = app => {
     })
   })
 
+  // 登录校验中间件
+  const authMiddleware = require('../../middleware/auth')
+
+  // 资源获取中间件
+  const resourceMiddleware = require('../../middleware/resource')
+
   app.use(
     '/admin/api/rest/:resource',
-    async (req, res, next) => {
-      const modelName = require('inflection').classify(req.params.resource)
-      req.Model = require(`../../models/${modelName}`)
-      next()
-    },
+    authMiddleware(),
+    resourceMiddleware(),
     router
   )
+
+  app.post('/admin/api/login', async (req, res) => {
+    const { username, password } = req.body
+    // 1、根据用户名找用户
+    const user = await AdminUser.findOne({ username }).select('+password')
+    assert(user, 422, '用户不存在')
+    // 2、校验密码
+    const isValide = require('bcrypt').compareSync(password, user.password)
+    assert(isValide, 422, '密码错误')
+    // 3、返回token
+    const token = jwt.sign({ id: user._id }, app.get('secret'))
+    res.send({ token })
+  })
+
+  // 错误处理函数
+  app.use(async (err, req, res, next) => {
+    res.status(err.statusCode || 500).send({
+      message: err.message
+    })
+  })
 }

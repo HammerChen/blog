@@ -15,7 +15,7 @@ import AdminUserList from '../views/AdminUserList.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', component: Login },
+  { path: '/login', component: Login, meta: { isPublic: true } },
   {
     path: '/',
     component: Main,
@@ -23,9 +23,11 @@ const routes = [
       { path: '/', component: ArticleList },
       { path: '/articles/create', component: ArticleEdit },
       { path: '/articles/edit/:id', component: ArticleEdit, props: true },
+
       { path: '/tags/list', component: TagList },
       { path: '/tags/create', component: TagEdit },
       { path: '/tags/edit/:id', component: TagEdit, props: true },
+
       { path: '/admin_users/list', component: AdminUserList },
       { path: '/admin_users/create', component: AdminUserEdit },
       { path: '/admin_users/edit/:id', component: AdminUserEdit, props: true }
@@ -35,6 +37,12 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !localStorage.token) {
+    return next('/login')
+  }
+  next()
 })
 
 export default router
