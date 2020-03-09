@@ -14,6 +14,7 @@ app.use('/', express.static(__dirname + '/web'))
 
 require('./plugins/db')(app)
 require('./routes/admin')(app)
+require('./routes/web')(app)
 
 const PORT = process.env.ADMIN_PORT
 
