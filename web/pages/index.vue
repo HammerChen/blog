@@ -2,7 +2,7 @@
   <div class="articles pa-3 mr-5">
     <v-row>
       <v-col v-for="item in articles" :key="item._id" md="12">
-        <v-card :to="`/articles/${item._id}`" class="mx-auto" color="#1e3f5a">
+        <v-card :to="`/articles/${item._id}`" class="mx-auto" color="#192633">
           <v-card-text>
             <div class="display-1 text--primary">
               {{ item.title }}
@@ -38,7 +38,7 @@ export default {
 
 <style>
 .articles {
-  background-color: #1a222c !important;
+  background-color: #141921 !important;
   max-width: 100%;
   height: 100%;
 }

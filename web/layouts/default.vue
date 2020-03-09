@@ -51,12 +51,12 @@ export default {
 
 <style>
 .top-bar {
-  background-color: #1a222c !important;
+  background-color: #141921 !important;
   box-shadow: none;
 }
 
 .side {
-  background-color: #1a222c !important;
+  background-color: #141921 !important;
 }
 
 .author_info {
