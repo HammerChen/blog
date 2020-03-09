@@ -5,27 +5,19 @@
       class="side"
       app
       clipped
-      floating
       width="300px;"
     >
-      <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-settings</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <div class="author_info">
+        <img src="/avatar.png" />
+        <h1>陈小锤</h1>
+        <p>
+          Hi 👋🏼 I'm Hammer, a nomad Software Engineer.I write tutorials for
+          JavaScript and sometimes I take awesome pictures 🌅!
+        </p>
+        <span class="copyright">
+          Copyright © 2020 陈小锤
+        </span>
+      </div>
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left class="top-bar">
@@ -65,6 +57,48 @@ export default {
 
 .side {
   background-color: #1a222c !important;
+}
+
+.author_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /*垂直居中*/
+  align-content: center;
+  margin: 0 auto;
+  text-align: center;
+  padding: 45px 15px 15px 15px;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+}
+
+img {
+  border-radius: 100%;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 1.5em;
+  background-color: #ffffff;
+}
+
+h1 {
+  margin: 0 0 1em 0;
+}
+
+p {
+  display: block;
+  margin-bottom: 1.25em;
+  font-size: 18px;
+  opacity: 0.6;
+  white-space: 2.5rem;
+  width: 260px;
+}
+
+.v-navigation-drawer__border {
+  width: 0;
 }
 
 html {
