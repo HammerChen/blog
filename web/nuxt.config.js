@@ -7,16 +7,21 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: '陈小锤的博客',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: '陈小锤, 全栈, blog'
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: '全栈开发，JavaScript, Node, Vue，Nuxt'
+      },
+      { name: 'author', content: 'chenxiaochui@126.com' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },

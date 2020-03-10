@@ -101,6 +101,7 @@ img {
 
 h1 {
   padding: 0;
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 </style>
