@@ -5,7 +5,7 @@
         <img src="/avatar.png" />
         <h1>陈小锤</h1>
         <p>
-          Hi 👋🏼 I'm Hammer, a nomad Software Engineer.I write tutorials for
+          Hi 🖖 I'm Hammer, a nomad Software Engineer.I write tutorials for
           JavaScript and sometimes I take awesome pictures 🌅!
         </p>
         <div class="copyright">
