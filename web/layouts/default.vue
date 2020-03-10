@@ -1,12 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      class="side"
-      app
-      clipped
-      width="300px;"
-    >
+    <v-navigation-drawer v-model="drawer" app clipped width="360px;">
       <div class="author_info">
         <img src="/avatar.png" />
         <h1>陈小锤</h1>
@@ -14,13 +8,19 @@
           Hi 👋🏼 I'm Hammer, a nomad Software Engineer.I write tutorials for
           JavaScript and sometimes I take awesome pictures 🌅!
         </p>
-        <span class="copyright">
-          Copyright © 2020 陈小锤
-        </span>
+        <div class="copyright">
+          <span>
+            Copyright © 2020 陈小锤
+          </span>
+        </div>
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app clipped-left class="top-bar">
+    <v-app-bar app clipped-left class="top_bar">
+      <div class="home">
+        <span class="title">陈小锤的博客</span>
+        <v-icon large @click="$router.push('/')">mdi-home</v-icon>
+      </div>
       <v-spacer></v-spacer>
 
       <v-btn icon>
@@ -42,78 +42,65 @@
 export default {
   data: () => ({
     drawer: null
-  }),
-  created() {
-    this.$vuetify.theme.dark = true
-  }
+  })
 }
 </script>
 
-<style>
-.top-bar {
-  background-color: #141921 !important;
+<style scoped>
+.top_bar {
   box-shadow: none;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.side {
-  background-color: #141921 !important;
+.home {
+  display: inline-block;
+  margin: auto 70px;
+}
+
+.title {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
 .author_info {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   justify-content: flex-start;
   align-items: center; /*垂直居中*/
   align-content: center;
   margin: 0 auto;
   text-align: center;
-  padding: 45px 15px 15px 15px;
-}
-
-.copyright {
-  display: flex;
-  justify-content: center;
-  font-size: 15px;
-}
-
-img {
-  border-radius: 100%;
-  width: 130px;
-  height: 130px;
-  margin-bottom: 1.5em;
-  background-color: #ffffff;
-}
-
-h1 {
-  margin: 0 0 1em 0;
+  height: 700px;
+  padding: 60px 15px 15px 15px;
 }
 
 p {
-  display: block;
   margin-bottom: 1.25em;
   font-size: 18px;
   opacity: 0.6;
   white-space: 2.5rem;
   width: 260px;
+  flex-basis: 200px;
+  flex: 1;
 }
 
-.v-navigation-drawer__border {
-  width: 0;
+.copyright {
+  justify-content: center;
+  font-size: 15px;
 }
 
-html {
-  overflow: -moz-hidden-unscrollable;
-  height: 100%;
+img {
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  border-radius: 100%;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 1.5em;
 }
 
-body::-webkit-scrollbar {
-  display: none;
-}
-
-body {
-  -ms-overflow-style: none;
-  height: 100%;
-  width: calc(100vw + 18px);
-  overflow: auto;
+h1 {
+  padding: 0;
+  margin-bottom: 1.5rem;
 }
 </style>

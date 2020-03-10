@@ -1,11 +1,16 @@
 <template>
-  <div class="articles pa-3 mr-5">
+  <div class="articles">
     <v-row>
       <v-col v-for="item in articles" :key="item._id" md="12">
-        <v-card :to="`/articles/${item._id}`" class="mx-auto" color="#192633">
+        <v-card
+          :to="`/articles/${item._id}`"
+          class="mx-auto"
+          style="box-shadow: none;"
+          min-width="414px"
+        >
           <v-card-text>
             <div class="display-1 text--primary">
-              {{ item.title }}
+              <h5>{{ item.title }}</h5>
             </div>
             <p>{{ item.createdAt | date }}</p>
             <div class="text--primary">
@@ -38,8 +43,17 @@ export default {
 
 <style>
 .articles {
-  background-color: #141921 !important;
-  max-width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .articles {
+    padding: 15px;
+  }
 }
 </style>
