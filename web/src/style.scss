@@ -1,4 +1,4 @@
-// rest
+// reset
 * {
   box-sizing: border-box;
   outline: none;
@@ -14,4 +14,49 @@ body {
 }
 a {
   color: #999;
+}
+
+// colors
+$colors: (
+  'primary-1': #359499,
+  'primary-2': #c6eaea,
+  'primary-3': #e9f7f7,
+  'white': #fff,
+  'light': #aaa,
+  'grey-1': #6f7c8a,
+  'grey-2': #525b65,
+  'dark': #212529,
+  'black': #000
+);
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+// text algin
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var;
+  }
+}
+
+// font size
+$base-font-size: 1;
+$font-sizes: (
+  xs: 0.75,  // 12px
+  sm: 0.875,  // 14px
+  md: 1,  // 16px
+  lg: 1.125,  // 18px
+  xl: 1.25,  // 20px
+  xxl: 1.625,  // 26px
+  xxxl: 2.1875  // 35px
+);
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
 }
