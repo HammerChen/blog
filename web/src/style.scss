@@ -47,13 +47,19 @@ $colors: (
 // font size
 $base-font-size: 1;
 $font-sizes: (
-  xs: 0.75,  // 12px
-  sm: 0.875,  // 14px
-  md: 1,  // 16px
-  lg: 1.125,  // 18px
-  xl: 1.25,  // 20px
-  xxl: 1.625,  // 26px
-  xxxl: 2.1875  // 35px
+  xs: 0.75,
+  // 12px
+    sm: 0.875,
+  // 14px
+    md: 1,
+  // 16px
+    lg: 1.125,
+  // 18px
+    xl: 1.25,
+  // 20px
+    xxl: 1.625,
+  // 26px
+    xxxl: 2.1875 // 35px
 );
 @each $sizeKey, $size in $font-sizes {
   .fs-#{$sizeKey} {
@@ -95,4 +101,52 @@ $flex-ai: (
 // 左边固定，右边元素撑满剩余空间
 .flex-1 {
   flex: 1;
+}
+
+// spacing
+$spacing-types: (
+  m: margin,
+  p: padding
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3
+);
+@each $typeKey, $type in $spacing-types {
+  // .m-1
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+  // .mx-1 , .my-1
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+  // .mt-1
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
 }
