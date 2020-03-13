@@ -16,7 +16,7 @@
           <button class="Markdown">Markdown</button>
           <button class="NodeJs">NodeJs</button>
         </div>
-        <span class="d-flex jc-center fs-sm">Powerd by Vue CLI & Node.js</span>
+        <span class="d-flex jc-center fs-sm text-light">Powerd by Vue CLI & Node.js</span>
       </div>
     </aside>
 
@@ -71,7 +71,7 @@ export default {}
 }
 
 .tags {
-  margin-bottom: 2.25rem;
+  margin-bottom: 9rem;
   flex-wrap: wrap;
 }
 
