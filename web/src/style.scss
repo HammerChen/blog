@@ -5,16 +5,26 @@
 }
 html {
   font-size: 16px;
+  height: 100%;
+  overflow: -moz-hidden-unscrollable;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5em;
   background: #fff;
+  height: 100%;
+  width: calc(100vw + 18px);
+  overflow: auto;
+  -ms-overflow-style: none;
   -webkit-font-smoothing: antialiased;
 }
 a {
-  color: #999;
+  color: #000;
+  text-decoration: none;
 }
 
 // colors
@@ -151,4 +161,9 @@ $spacing-sizes: (
       }
     }
   }
+}
+
+// nav
+.navbar {
+  border-bottom: 1px solid map-get($colors, 'primary-3');
 }

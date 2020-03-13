@@ -1,26 +1,12 @@
 <template>
-  <div>
-    {{ articles }}
+  <div class="container">
+    <div class="p-3">首页</div>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      articles: {}
-    }
-  },
-  methods: {
-    async fetch() {
-      const res = await this.$http.get('articles')
-      this.articles = res.data
-    }
-  },
-  created() {
-    this.fetch()
-  }
-}
+export default {}
 </script>
 
-<style></style>
+<style>
+</style>
