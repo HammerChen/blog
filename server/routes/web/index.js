@@ -5,7 +5,7 @@ module.exports = app => {
   const Article = mongoose.model('Article')
 
   router.get('/articles', async (req, res) => {
-    const articles = await Article.find()
+    const articles = await Article.find().populate('tags')
     res.send(articles)
   })
 

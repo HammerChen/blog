@@ -36,7 +36,8 @@ $colors: (
   'light': #aaa,
   'grey-1': #6f7c8a,
   'grey-2': #525b65,
-  'dark': #212529,
+  'dark-1': #212529,
+  'dark-2': #1a222c,
   'black': #000
 );
 @each $colorKey, $color in $colors {
@@ -161,9 +162,4 @@ $spacing-sizes: (
       }
     }
   }
-}
-
-// nav
-.navbar {
-  border-bottom: 1px solid map-get($colors, 'primary-3');
 }

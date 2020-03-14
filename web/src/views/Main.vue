@@ -1,13 +1,16 @@
 <template>
   <div class="container">
-    <aside class="sidebar">
+    <aside class="sidebar text-white">
       <div class="metadata">
-        <div class="author d-flex flex-column ai-center text-center pt-5 pr-3 pb-3 pl-3">
+        <div
+          class="author d-flex flex-column ai-center text-center pt-5 pr-3 pb-3 pl-3"
+        >
           <img class="avatar mb-4" src="../assets/logo.png" />
           <h1 class="m-0 mb-4">陈小锤</h1>
-          <p
-            class="author_intro m-0 mb-4 fs-lg"
-          >Hi 🖖 I'm Hammer, a nomad Software Engineer. I write tutorials for JavaScript and sometimes I take awesome pictures 🌅!</p>
+          <p class="author_intro m-0 mb-4 fs-lg">
+            Hi 🖖 I'm Hammer, a nomad Software Engineer. I write tutorials for
+            JavaScript and sometimes I take awesome pictures 🌅!
+          </p>
         </div>
         <div class="tags d-flex jc-center">
           <button class="JavaScript">JavaScript</button>
@@ -16,18 +19,20 @@
           <button class="Markdown">Markdown</button>
           <button class="NodeJs">NodeJs</button>
         </div>
-        <span class="d-flex jc-center fs-sm text-light">Powerd by Vue CLI & Node.js</span>
+        <span class="d-flex jc-center fs-sm text-light"
+          >Powerd by Vue CLI & Node.js</span
+        >
       </div>
     </aside>
 
-    <header class="navbar">
+    <header class="navbar bg-dark-2">
       <router-link class="d-flex py-2 ai-center" to="/">
         <img class="pl-3 pr-2" src="../assets/logo.png" height="40" />
-        <h3 class="m-0">陈小锤的博客</h3>
+        <h3 class="m-0 text-white">陈小锤的博客</h3>
       </router-link>
     </header>
 
-    <main class="page">
+    <main class="page d-flex flex-column ai-center fs-lg bg-dark-2">
       <router-view></router-view>
     </main>
   </div>
@@ -43,18 +48,19 @@ export default {}
   position: fixed;
   z-index: 10;
   margin: 0;
-  top: 3.6rem;
+  top: 3.5rem;
   left: 0;
   bottom: 0;
   box-sizing: border-box;
-  border-right: 1px solid #e9f7f7;
+  background: #1a222c;
   overflow-y: auto;
 }
 
 .page {
   padding-left: 20rem;
   padding-bottom: 2rem;
-  display: block;
+  font-weight: 400;
+  height: 100vh;
 }
 
 .avatar {
