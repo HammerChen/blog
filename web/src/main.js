@@ -4,7 +4,8 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
-import './style.scss'
+import './assets/scss/style.scss'
+
 import router from './router'
 
 Vue.prototype.$http = axios.create({

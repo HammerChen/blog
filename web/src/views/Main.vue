@@ -27,7 +27,7 @@
 
     <header class="navbar bg-dark-2">
       <router-link class="d-flex py-2 ai-center" to="/">
-        <img class="pl-3 pr-2" src="../assets/logo.png" height="40" />
+        <img class="pl-4 pr-2" src="../assets/logo.png" height="40" />
         <h3 class="m-0 text-white">陈小锤的博客</h3>
       </router-link>
     </header>
@@ -52,7 +52,6 @@ export default {}
   left: 0;
   bottom: 0;
   box-sizing: border-box;
-  background: #1a222c;
   overflow-y: auto;
 }
 
@@ -60,7 +59,6 @@ export default {}
   padding-left: 20rem;
   padding-bottom: 2rem;
   font-weight: 400;
-  height: 100vh;
 }
 
 .avatar {
