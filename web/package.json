@@ -13,7 +13,7 @@
     "dayjs": "^1.8.22",
     "github-markdown-css": "^4.0.0",
     "marked": "^0.8.0",
-    "prismjs": "^1.19.0",
+    "prismjs": "^1.24.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5"
   },
